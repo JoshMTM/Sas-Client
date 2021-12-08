@@ -1,0 +1,13 @@
+.inputOption:hover {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.inputOption {
+  align-items: center;
+  margin-top: 5px;
+  color: gray;
+  cursor: pointer;
+}
