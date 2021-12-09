@@ -14,6 +14,7 @@ import Dreams from "./components/Dreams";
 
 function App() {
   const [dreams, setDreams] = useState([]);
+  const [newDream, setNewDream] = useState(null);
   const navigate = useNavigate();
   const [fetchUser, setUser] = useState(true);
 
@@ -32,6 +33,7 @@ function App() {
         });
         setUser(false);
         setUser(userResponse.data);
+        console.log(userResponse.data);
       } catch (err) {
         setUser(false);
       }
@@ -44,7 +46,6 @@ function App() {
     event.preventDefault();
     const imgForm = new FormData();
     imgForm.append("imageUrl", event.target.myImage.files[0]);
-    console.log(event.target.myImage.files[0]);
     const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
     let newDream = {
       title: event.target.title.value,
@@ -57,8 +58,11 @@ function App() {
     const response = await axios.post(`${API_URL}/dreams/new`, newDream, {
       withCredentials: true,
     });
-    setDreams([response.data, ...dreams]);
-    navigate("/dreams");
+    // setDreams([response.data, ...dreams]);
+    setNewDream(response.data);
+    console.log(response.data);
+    // navigate("/");
+    navigate(`/dreams/${response.data.dreamer}/items`);
   };
 
   return (
@@ -72,6 +76,10 @@ function App() {
           element={<DreamCreation btnAddDream={submitDream} />}
         />
         <Route path="/dreams" element={<Dreams dreams={dreams} />} />
+        <Route
+          path="/dreams/:id/items"
+          element={<DreamCreation dream={newDream} />}
+        />
       </Routes>
     </div>
   );

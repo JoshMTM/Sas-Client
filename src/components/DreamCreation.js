@@ -7,7 +7,7 @@ import { TextField, Grid } from "@mui/material";
 import Items from "./Items";
 
 function DreamCreation(props) {
-  const { btnAddDream } = props;
+  const { btnAddDream, dream } = props;
 
   //Image Preview before uploading
   const [selectedFile, setSelectedFile] = useState();
@@ -109,7 +109,7 @@ function DreamCreation(props) {
             Add Items
           </Button>
         </Box>
-        <Items />
+        <Items newDream={dream} />
         <Link to="/home">
           <Button variant="contained" sx={{ mt: 3, mb: 2 }}>
             Add Later
