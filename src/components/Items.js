@@ -2,16 +2,32 @@ import { useState, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../config";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import { TextField, Grid } from "@mui/material";
+import ItemForm from "./ItemForm";
 
 function Items(props) {
   const [dreamer, setDreamer] = useState(null);
-  const [formRows, setFormRows] = useState([{ id: 1 }]);
+  const [newItem, setItem] = useState(null);
   const { newDream } = props;
   console.log(newDream);
   const { userId } = useParams();
+
+  const submitItem = async (event) => {
+    event.preventDefault();
+    let newItem = {
+      name: event.target.name.value,
+      category: event.target.category.value,
+      description: event.target.description.value,
+      qty: event.target.qty.value,
+    };
+    //Send a post request with the new item
+    const response = await axios.post(`${API_URL}/items/new`, newItem, {
+      withCredentials: true,
+    });
+    // setDreams([response.data, ...dreams]);
+    setItem(response.data);
+    console.log(response.data);
+    // navigate("/");
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -27,68 +43,6 @@ function Items(props) {
 
   return (
     <div>
-      <div>
-        <Box component="form" sx={{ mt: 3 }}>
-          {" "}
-          {formRows.map((row) => (
-            <div style={{ margin: "10px" }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    name="name"
-                    label="Item name"
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>{" "}
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    name="category"
-                    label="Category"
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>{" "}
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    name="descriptoin"
-                    label="Description"
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>{" "}
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    name="qty"
-                    label="Quantity"
-                    type="Number"
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Button
-                  onClick={() =>
-                    setFormRows(formRows.filter((fr) => fr.id !== row.id))
-                  }
-                >
-                  remove
-                </Button>
-              </Grid>
-            </div>
-          ))}
-          <Button
-            onClick={() =>
-              setFormRows([...formRows, { id: formRows.length + 1 }])
-            }
-          >
-            add
-          </Button>
-        </Box>
-      </div>
       <div className="dream_carousel">
         {!newDream ? (
           "Please create a dream before adding items"
@@ -105,6 +59,11 @@ function Items(props) {
           </div>
         )}
       </div>
+      {!newDream ? (
+        "Your items are going to appear here"
+      ) : (
+        <ItemForm btnAddItem={submitItem} />
+      )}
     </div>
   );
 }

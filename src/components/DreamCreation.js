@@ -37,7 +37,7 @@ function DreamCreation(props) {
     setSelectedFile(e.target.files[0]);
   };
   return (
-    <div>
+    <div style={{ margin: "20px" }}>
       <h2>Would you like to share you dream with the World?</h2>
       <h2>Share your dream</h2>
       <Link to="/home">
