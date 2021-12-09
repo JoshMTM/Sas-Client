@@ -28,17 +28,22 @@ function SignUp(props) {
     console.log(event.target.myImage.files[0]);
     const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
     let newUser = {
-      firstNale: event.target.firstName.value,
+      firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
       email: event.target.email.value,
       password: event.target.password.value,
       image: imgResponse.data.image,
+      addressline: event.target.addressline.value,
+      zipCode: event.target.zipCode.value,
+      city: event.target.city.value,
+      state: event.target.state.value,
+      country: event.target.country.value,
     };
     //Send a post request with the new user
     await axios.post(`${API_URL}/signup`, newUser, {
       withCredentials: true,
     });
-    navigate("/");
+    navigate("/dreams/new");
   };
 
   //Image Preview before uploading
@@ -156,6 +161,58 @@ function SignUp(props) {
                   />
                 )}
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  label="Address line 1"
+                  name="Addressline"
+                  variant="outlined"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Address line 2"
+                  variant="outlined"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  name="zipCode"
+                  label="Postal/Zip Code"
+                  variant="outlined"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="city"
+                  required
+                  label="City"
+                  variant="outlined"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="state"
+                  label="Province/State"
+                  variant="outlined"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  name="country"
+                  label="Country"
+                  variant="outlined"
+                  fullWidth
+                />
+              </Grid>
+
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
