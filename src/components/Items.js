@@ -3,6 +3,8 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../config";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import { TextField, Grid } from "@mui/material";
 
 function Items(props) {
   const [dreamer, setDreamer] = useState(null);
@@ -26,32 +28,66 @@ function Items(props) {
   return (
     <div>
       <div>
-        {formRows.map((row) => (
-          <div>
-            <input type="text" placeholder="Name" name="name"></input>
-            <input type="text" placeholder="Category" name="category"></input>
-            <input
-              type="text"
-              placeholder="Description"
-              name="description"
-            ></input>
-            <input type="number" placeholder="Quantity" name="qty"></input>
-            <Button
-              onClick={() =>
-                setFormRows(formRows.filter((fr) => fr.id !== row.id))
-              }
-            >
-              remove
-            </Button>
-          </div>
-        ))}
-        <Button
-          onClick={() =>
-            setFormRows([...formRows, { id: formRows.length + 1 }])
-          }
-        >
-          add
-        </Button>
+        <Box component="form" sx={{ mt: 3 }}>
+          {" "}
+          {formRows.map((row) => (
+            <div style={{ margin: "10px" }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    name="name"
+                    label="Item name"
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Grid>{" "}
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    name="category"
+                    label="Category"
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Grid>{" "}
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    name="descriptoin"
+                    label="Description"
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Grid>{" "}
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    name="qty"
+                    label="Quantity"
+                    type="Number"
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Grid>
+                <Button
+                  onClick={() =>
+                    setFormRows(formRows.filter((fr) => fr.id !== row.id))
+                  }
+                >
+                  remove
+                </Button>
+              </Grid>
+            </div>
+          ))}
+          <Button
+            onClick={() =>
+              setFormRows([...formRows, { id: formRows.length + 1 }])
+            }
+          >
+            add
+          </Button>
+        </Box>
       </div>
       <div className="dream_carousel">
         {!newDream ? (
