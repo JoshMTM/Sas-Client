@@ -1,20 +1,77 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "./config";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./components/HomeApp";
+
+// import HomePage from "./components/HomeApp";
 import WelcomeApp from "./components/welcome/WelcomeApp";
 import SignIn from "./components/homeComponents/authComponents/SignIn";
 import SignUp from "./components/homeComponents/authComponents/SignUp";
-import DreamCreation from "./components/homeComponents/authComponents/DreamCreation";
+import DreamCreation from "./components/DreamCreation";
+import Dreams from "./components/Dreams";
 
 function App() {
+  const [dreams, setDreams] = useState([]);
+  const navigate = useNavigate();
+  const [fetchUser, setUser] = useState(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      let response = await axios.get(`${API_URL}/dreams`, {
+        withCredentials: true,
+      });
+      setDreams(response.data);
+
+      //-----------------------------------------------
+      // we make the user requst here to know if the user is logged in or not
+      try {
+        let userResponse = await axios.get(`${API_URL}/user`, {
+          withCredentials: true,
+        });
+        setUser(false);
+        setUser(userResponse.data);
+      } catch (err) {
+        setUser(false);
+      }
+    };
+
+    getData();
+  }, []);
+
+  const submitDream = async (event) => {
+    event.preventDefault();
+    const imgForm = new FormData();
+    imgForm.append("imageUrl", event.target.myImage.files[0]);
+    console.log(event.target.myImage.files[0]);
+    const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
+    let newDream = {
+      title: event.target.title.value,
+      description: event.target.description.value,
+      category: event.target.category.value,
+      image: imgResponse.data.image,
+      date: event.target.date.value,
+    };
+    //Send a post request with the new user
+    const response = await axios.post(`${API_URL}/dreams/new`, newDream, {
+      withCredentials: true,
+    });
+    setDreams([response.data, ...dreams]);
+    navigate("/dreams");
+  };
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<WelcomeApp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/dreams/new" element={<DreamCreation />} />
+        <Route
+          path="/dreams/new"
+          element={<DreamCreation btnAddDream={submitDream} />}
+        />
+        <Route path="/dreams" element={<Dreams dreams={dreams} />} />
       </Routes>
     </div>
   );
