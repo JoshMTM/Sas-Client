@@ -25,21 +25,26 @@ function Feed() {
   //New posts/updates creating
   const sendPost = async (e) => {
     e.preventDefault();
-    const imgForm = new FormData();
-    imgForm.append("imageUrl", e.target.myImage.files[0]);
-    const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
-    let newPost = {
+    // const imgForm = new FormData();
+    // imgForm.append("imageUrl", e.target.myImage.files[0]);
+    // const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
+    const day = new Date().getDay();
+    const month = new Date().getMonth();
+    const year = new Date().getFullYear();
+    const newPost = {
       name: "test",
       description: "test",
       message: input,
-      photoUrl: imgResponse.data.image,
-      date: e.target.date.value,
+      // photoUrl: imgResponse.data.image,
+      date: `${day} - ${month} - ${year}`,
     };
+    console.log(newPost.date);
     //Send a post request with the new user
-    const response = await axios.post(`${API_URL}/dreams/new`, newPost, {
+    const response = await axios.post(`${API_URL}/updates/new`, newPost, {
       withCredentials: true,
     });
-    setPosts([...posts]);
+    console.log(response.data);
+    setPosts([response.data, ...posts]);
   };
 
   return (
@@ -69,15 +74,17 @@ function Feed() {
           <InputOption Icon={EventSeatIcon} title="Event" color="#c74702" />
         </div>
       </div>
-      {posts.map((post) => {
-        return <Posts />;
+      {posts.map((elem) => {
+        return (
+          <Posts
+            key={elem._id}
+            name={elem.name}
+            description={elem.description}
+            message={elem.message}
+            photoUrl={elem.image}
+          />
+        );
       })}
-      <Posts
-        name="Josh Mitima"
-        description="This is a test"
-        message="How about this"
-        photoUrl=""
-      />
     </div>
   );
 }
