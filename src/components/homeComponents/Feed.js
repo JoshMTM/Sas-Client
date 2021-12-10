@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import InputOption from "./InputOptions";
 import "./Feed.css";
 import Posts from "./Posts";
@@ -7,21 +8,51 @@ import ImageIcon from "@mui/icons-material/Image";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import EventSeatIcon from "@mui/icons-material/EventSeat";
+import { API_URL } from "../../config";
 
 function Feed() {
+  const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
-  const sendPost = (e) => {
-    e.preventDefault();
 
+  useEffect(() => {
+    async function getPosts() {
+      const response = await axios.get(`${API_URL}/updates`);
+      setPosts(response.data);
+    }
+    getPosts();
+  }, []);
+
+  //New posts/updates creating
+  const sendPost = async (e) => {
+    e.preventDefault();
+    const imgForm = new FormData();
+    imgForm.append("imageUrl", e.target.myImage.files[0]);
+    const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
+    let newPost = {
+      name: "test",
+      description: "test",
+      message: input,
+      photoUrl: imgResponse.data.image,
+      date: e.target.date.value,
+    };
+    //Send a post request with the new user
+    const response = await axios.post(`${API_URL}/dreams/new`, newPost, {
+      withCredentials: true,
+    });
     setPosts([...posts]);
   };
+
   return (
     <div className="feed">
       <div className="feed__inputContainer">
         <div className="feed__input">
           <CreateIcon />
           <form>
-            <input type="text" />
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              type="text"
+            />
             <button onClick={sendPost} type="submit">
               Update
             </button>

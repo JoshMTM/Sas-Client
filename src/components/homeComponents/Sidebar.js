@@ -1,4 +1,6 @@
 import { Avatar } from "@mui/material";
+import MyCalendar from "./MyCalendar";
+import MyMap from "./MyMap";
 import "./Sidebar.css";
 
 function Sidebar() {
@@ -40,6 +42,12 @@ function Sidebar() {
           <p>Dreams</p>
           <p className="sidebar__statNumber">15 dreams</p>
         </div>
+      </div>
+      <div className="calendar">
+        <MyCalendar />
+      </div>
+      <div className="map">
+        <MyMap />
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ function DreamCreation(props) {
 
   return (
     <div style={{ margin: "20px" }}>
-      <h2>Would you like to share you dream with the World?</h2>
+      <h2>Would you like to share your dream with the World?</h2>
       <h2>Share your dream</h2>
       <Link to="/home">
         <Button variant="contained" sx={{ mt: 3, mb: 2 }}>
