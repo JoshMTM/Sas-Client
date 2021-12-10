@@ -5,7 +5,7 @@ import { API_URL } from "./config";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
-// import HomePage from "./components/HomeApp";
+import HomePage from "./components/HomeApp";
 import WelcomeApp from "./components/welcome/WelcomeApp";
 import SignIn from "./components/homeComponents/authComponents/SignIn";
 import SignUp from "./components/homeComponents/authComponents/SignUp";
@@ -58,7 +58,7 @@ function App() {
     const response = await axios.post(`${API_URL}/dreams/new`, newDream, {
       withCredentials: true,
     });
-    // setDreams([response.data, ...dreams]);
+    setDreams([response.data, ...dreams]);
     setNewDream(response.data);
     console.log(response.data);
     // navigate("/");
@@ -71,14 +71,15 @@ function App() {
         <Route path="/" element={<WelcomeApp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<HomePage />} />
         <Route
           path="/dreams/new"
-          element={<DreamCreation btnAddDream={submitDream} />}
+          element={<DreamCreation dream={newDream} btnAddDream={submitDream} />}
         />
         <Route path="/dreams" element={<Dreams dreams={dreams} />} />
         <Route
           path="/dreams/:id/items"
-          element={<DreamCreation dream={newDream} />}
+          element={<DreamCreation dream={newDream} btnAddDream={submitDream} />}
         />
       </Routes>
     </div>

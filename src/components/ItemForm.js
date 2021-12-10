@@ -36,7 +36,7 @@ function ItemForm(props) {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    name="descriptoin"
+                    name="description"
                     label="Description"
                     variant="outlined"
                     fullWidth

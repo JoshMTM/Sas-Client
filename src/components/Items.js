@@ -7,6 +7,7 @@ import ItemForm from "./ItemForm";
 function Items(props) {
   const [dreamer, setDreamer] = useState(null);
   const [newItem, setItem] = useState(null);
+
   const { newDream } = props;
   console.log(newDream);
   const { userId } = useParams();
@@ -18,6 +19,7 @@ function Items(props) {
       category: event.target.category.value,
       description: event.target.description.value,
       qty: event.target.qty.value,
+      dream: newDream._id,
     };
     //Send a post request with the new item
     const response = await axios.post(`${API_URL}/items/new`, newItem, {
@@ -39,7 +41,7 @@ function Items(props) {
       console.log(response.data);
     };
     getUser();
-  }, []);
+  }, [dreamer]);
 
   return (
     <div>
@@ -48,13 +50,13 @@ function Items(props) {
           "Please create a dream before adding items"
         ) : (
           <div>
-            <img src={newDream.image} alt="dream" />
+            <img src={newDream.image} alt="dream" style={{ width: "250px" }} />
             <div className="carousel_right">
               <h3>{newDream.title}</h3>
               <p>{newDream.description}</p>
             </div>
             <div>
-              <h1>{newDream}'s items</h1>
+              <h1>{newDream.title}'s needed items</h1>
             </div>
           </div>
         )}
