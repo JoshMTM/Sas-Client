@@ -5,6 +5,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import Dropdown from "react-bootstrap/Dropdown";
+import Button from "react-bootstrap/Button";
+import { ButtonGroup } from "react-bootstrap";
 
 function header() {
   return (
@@ -21,7 +24,28 @@ function header() {
           <HeaderOption Icon={SupervisorAccountIcon} title="My Support" />
           <HeaderOption Icon={ChatIcon} title="Messages" />
           <HeaderOption Icon={NotificationsIcon} title="Notifications" />
-          <HeaderOption avatar="https://i.imgur.com/ZnC8cDv.jpg" title="me" />
+          <Dropdown as={ButtonGroup}>
+            <Button variant="link">
+              <HeaderOption
+                avatar="https://i.imgur.com/ZnC8cDv.jpg"
+                title="me"
+              />
+            </Button>
+
+            <Dropdown.Toggle
+              split
+              variant="success"
+              id="dropdown-split-basic"
+              style={{ height: "60px", marginLeft: "-30px" }}
+            />
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">View My Profile</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Edit Profile</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </div>
     </div>

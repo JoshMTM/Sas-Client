@@ -36,7 +36,7 @@ function Feed() {
       description: "test",
       message: input,
       // photoUrl: imgResponse.data.image,
-      date: `${day} - ${month} - ${year}`,
+      date: `${day} ${month} ${year}`,
     };
     console.log(newPost.date);
     //Send a post request with the new user
@@ -45,6 +45,7 @@ function Feed() {
     });
     console.log(response.data);
     setPosts([response.data, ...posts]);
+    setInput("");
   };
 
   return (
