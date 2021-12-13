@@ -12,39 +12,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { API_URL } from "../../../config";
 
 const theme = createTheme();
 
 function SignUp(props) {
-  const navigate = useNavigate();
-
-  const handleSignUp = async (event) => {
-    event.preventDefault();
-    const imgForm = new FormData();
-    imgForm.append("imageUrl", event.target.myImage.files[0]);
-    console.log(event.target.myImage.files[0]);
-    const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
-    let newUser = {
-      firstName: event.target.firstName.value,
-      lastName: event.target.lastName.value,
-      email: event.target.email.value,
-      password: event.target.password.value,
-      image: imgResponse.data.image,
-      addressline: event.target.addressline.value,
-      zipCode: event.target.zipCode.value,
-      city: event.target.city.value,
-      state: event.target.state.value,
-      country: event.target.country.value,
-    };
-    //Send a post request with the new user
-    await axios.post(`${API_URL}/signup`, newUser, {
-      withCredentials: true,
-    });
-    navigate("/dreams/new");
-  };
+  const { onSignUp } = props;
 
   //Image Preview before uploading
   const [selectedFile, setSelectedFile] = useState();
@@ -92,12 +64,7 @@ function SignUp(props) {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSignUp}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate onSubmit={onSignUp} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField

@@ -7,11 +7,12 @@ import React from "react";
 import "./Posts.css";
 import InputOptions from "./InputOptions";
 
-function Posts({ name, description, message, photoUrl }) {
+function Posts(props) {
+  const { name, description, message, image } = props;
   return (
     <div className="post">
       <div className="post__header">
-        <Avatar />
+        <Avatar src={image} />
         <div className="post__info">
           <h2>{name}</h2>
           <p>{description}</p>

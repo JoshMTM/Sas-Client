@@ -9,8 +9,11 @@ import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import EventSeatIcon from "@mui/icons-material/EventSeat";
 import { API_URL } from "../../config";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
 
 function Feed() {
+  const user = useSelector(selectUser);
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
@@ -32,10 +35,10 @@ function Feed() {
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
     const newPost = {
-      name: "test",
-      description: "test",
+      name: `${user.firstName} ${user.lastName}`,
+      description: user.city,
       message: input,
-      // photoUrl: imgResponse.data.image,
+      image: user.photoUrl,
       date: `${day} ${month} ${year}`,
     };
     console.log(newPost.date);
@@ -82,7 +85,7 @@ function Feed() {
             name={elem.name}
             description={elem.description}
             message={elem.message}
-            photoUrl={elem.image}
+            image={elem.image}
           />
         );
       })}

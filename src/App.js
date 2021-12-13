@@ -11,36 +11,113 @@ import SignIn from "./components/homeComponents/authComponents/SignIn";
 import SignUp from "./components/homeComponents/authComponents/SignUp";
 import DreamCreation from "./components/DreamCreation";
 import Dreams from "./components/Dreams";
+import { useDispatch } from "react-redux";
+import { login } from "./features/userSlice";
 
 function App() {
   const [dreams, setDreams] = useState([]);
   const [newDream, setNewDream] = useState(null);
   const navigate = useNavigate();
-  const [fetchUser, setUser] = useState(true);
+  // const [fetchUser, setUser] = useState(true);
+  const [myError, setError] = useState(null);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const getData = async () => {
-      let response = await axios.get(`${API_URL}/dreams`, {
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     //   let response = await axios.get(`${API_URL}/dreams`, {
+  //     //     withCredentials: true,
+  //     //   });
+  //     //   setDreams(response.data);
+
+  //     //-----------------------------------------------
+  //     // we make the user requst here to know if the user is logged in or not
+  //     try {
+  //       const userResponse = await axios.get(`${API_URL}/user`, {
+  //         withCredentials: true,
+  //       });
+  //       setUser(false);
+  //       dispatch(
+  //         login({
+  //           id: userResponse.data._id,
+  //           email: userResponse.data.email,
+  //           name: userResponse.data.firsName,
+  //           lastName: userResponse.data.lastName,
+  //           city: userResponse.data.city,
+  //           photoUrl: userResponse.data.image,
+  //         })
+  //       );
+  //       console.log(userResponse.data._id);
+  //     } catch (err) {
+  //       setUser(false);
+  //     }
+  //   };
+
+  //   getData();
+  // }, []);
+
+  const handleSignIn = async (event) => {
+    event.preventDefault();
+    console.log("whats happening here?");
+    try {
+      const newUser = {
+        email: event.target.email.value,
+        password: event.target.password.value,
+      };
+      console.log("am i getting here?");
+      const response = await axios.post(`${API_URL}/signin`, newUser, {
         withCredentials: true,
       });
-      setDreams(response.data);
+      console.log(response.data);
+      dispatch(
+        login({
+          email: response.data.email,
+          name: response.data.firsName,
+          lastName: response.data.lastName,
+          city: response.data.city,
+          photoUrl: response.data.image,
+        })
+      );
+    } catch (err) {
+      setError(err.response.data.error);
+    }
+    navigate("/home");
+  };
 
-      //-----------------------------------------------
-      // we make the user requst here to know if the user is logged in or not
-      try {
-        let userResponse = await axios.get(`${API_URL}/user`, {
-          withCredentials: true,
-        });
-        setUser(false);
-        setUser(userResponse.data);
-        console.log(userResponse.data);
-      } catch (err) {
-        setUser(false);
-      }
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    const imgForm = new FormData();
+    imgForm.append("imageUrl", event.target.myImage.files[0]);
+    console.log(event.target.myImage.files[0]);
+    const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
+    let newUser = {
+      firstName: event.target.firstName.value,
+      lastName: event.target.lastName.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
+      image: imgResponse.data.image,
+      addressline: event.target.addressline.value,
+      zipCode: event.target.zipCode.value,
+      city: event.target.city.value,
+      state: event.target.state.value,
+      country: event.target.country.value,
     };
+    //Send a post request with the new user
+    const response = await axios.post(`${API_URL}/signup`, newUser, {
+      withCredentials: true,
+    });
+    console.log(response.data);
+    dispatch(
+      login({
+        email: response.data.email,
+        name: response.data.firsName,
+        lastName: response.data.lastName,
+        city: response.data.city,
+        photoUrl: response.data.image,
+      })
+    );
 
-    getData();
-  }, []);
+    navigate("/home");
+  };
 
   const submitDream = async (event) => {
     event.preventDefault();
@@ -69,8 +146,11 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<WelcomeApp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/signin"
+          element={<SignIn myError={myError} onSignIn={handleSignIn} />}
+        />
+        <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
         <Route path="/home" element={<HomePage />} />
         <Route
           path="/dreams/new"

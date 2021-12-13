@@ -15,7 +15,10 @@ function Sidebar() {
     <div className="sidebar">
       <div className="sidebar__top">
         <img src="https://i.imgur.com/gdGMroT.png" alt="bgService" />
-        <Avatar className="sidebar__avatar" />
+        <Avatar
+          className="sidebar__avatar"
+          src="https://i.imgur.com/ZnC8cDv.jpg"
+        />
         <h2>Josh Mitima</h2>
         <h4>Certified Electrician</h4>
       </div>

@@ -4,9 +4,6 @@ import "./WelcomeApp.css";
 import Button from "@mui/material/Button";
 
 function WelcomeApp() {
-  async function handleSignIn(event) {
-    event.preventDefault();
-  }
   return (
     <div>
       <Header />

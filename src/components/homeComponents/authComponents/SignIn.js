@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +14,11 @@ import Typography from "@mui/material/Typography";
 // import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../../features/userSlice";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../../../config";
 
 function Copyright(props) {
   return (
@@ -35,15 +41,41 @@ function Copyright(props) {
 const theme = createTheme();
 
 function SignIn(props) {
-  //props will look like this
-  /*
-      props = {
-        onSignIn: Function
-      }
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const navigate = useNavigate();
+  const [myError, setError] = useState(null);
+  const dispatch = useDispatch();
 
-  */
+  // const { onSignIn } = props;
 
-  const { onSignIn } = props;
+  const handleSignIn = async (event) => {
+    event.preventDefault();
+    console.log("whats happening here?");
+    try {
+      console.log("am i getting here?");
+      const response = await axios.post(
+        `${API_URL}/signin`,
+        { email, password },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response.data);
+      dispatch(
+        login({
+          email: response.data.email,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          city: response.data.city,
+          photoUrl: response.data.image,
+        })
+      );
+    } catch (err) {
+      setError(err.response.data.error);
+    }
+    navigate("/home");
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -76,34 +108,40 @@ function SignIn(props) {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: "lightBlue" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" onSubmit={onSignIn} noValidate sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              onSubmit={handleSignIn}
+              noValidate
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
                 fullWidth
+                type="text"
+                onChange={(e) => setEmail(e.target.value)}
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
                 autoFocus
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
+                onChange={(e) => setPassword(e.target.value)}
                 name="password"
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
-                helperText={props.myError ? props.myError : ""}
-                error={props.myError ? true : false}
+                helperText={myError ? props.myError : ""}
+                error={myError ? true : false}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
