@@ -15,6 +15,7 @@ import { selectUser } from "../../features/userSlice";
 function Feed() {
   const user = useSelector(selectUser);
   const [input, setInput] = useState("");
+  const [myImage, setMyImage] = useState(null);
   const [postImg, setpostImg] = useState(null);
   const [posts, setPosts] = useState([]);
   const [showImg, setShowImg] = useState(false);
@@ -38,6 +39,7 @@ function Feed() {
   }, [selectedFile]);
 
   const onSelectFile = (e) => {
+    setMyImage(e.target.value);
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile(undefined);
       return;
@@ -59,6 +61,7 @@ function Feed() {
   const sendPost = async (e) => {
     e.preventDefault();
     const imgForm = new FormData();
+    console.log(e.target.value);
     imgForm.append("imageUrl", e.target.myImage.files[0]);
     const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
     setpostImg(imgResponse.data.image);
@@ -92,63 +95,61 @@ function Feed() {
   return (
     <div className="feed">
       <div className="feed__inputContainer">
-        <div className="feed__input">
-          <CreateIcon />
-          <form>
+        <form onSubmit={sendPost}>
+          <div className="feed__input">
+            <CreateIcon />
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               type="text"
             />
-            <button onClick={sendPost} type="submit">
-              Update
-            </button>
-          </form>
-        </div>
-        <div className="feed__inputOptions">
-          <InputFeedOptions
-            Icon={StarPurple500Icon}
-            title="Promotion"
-            color="#4e2e6c"
-          />
-          <InputFeedOptions
-            Icon={ImageIcon}
-            title="Photo"
-            color="#4e2e6c"
-            handleToggle={toggleImage}
-          />
-          {showImg ? (
-            <input
-              type="file"
-              onChange={onSelectFile}
-              name="myImage"
-              accept="image/png, image/jpg"
+            <button type="submit">Update</button>
+          </div>
+          <div className="feed__inputOptions">
+            <InputFeedOptions
+              Icon={StarPurple500Icon}
+              title="Promotion"
+              color="#4e2e6c"
             />
-          ) : (
-            ""
-          )}
-          {selectedFile && (
-            <img
-              style={{
-                width: "300px",
-                borderRadius: "20px",
-                marginTop: "10px",
-              }}
-              src={preview}
-              alt="img preview"
+            <InputFeedOptions
+              Icon={ImageIcon}
+              title="Photo"
+              color="#4e2e6c"
+              handleToggle={toggleImage}
             />
-          )}
-          <InputFeedOptions
-            Icon={SubscriptionsIcon}
-            title="Video"
-            color="#c74702"
-          />
-          <InputFeedOptions
-            Icon={EventSeatIcon}
-            title="Event"
-            color="#c74702"
-          />
-        </div>
+            {showImg ? (
+              <input
+                type="file"
+                onChange={onSelectFile}
+                value={myImage}
+                accept="image/png, image/jpg"
+              />
+            ) : (
+              ""
+            )}
+            {selectedFile && (
+              <img
+                style={{
+                  width: "300px",
+                  borderRadius: "20px",
+                  marginTop: "10px",
+                }}
+                src={preview}
+                alt="img preview"
+              />
+            )}
+            <InputFeedOptions
+              Icon={SubscriptionsIcon}
+              title="Video"
+              color="#c74702"
+            />
+            <InputFeedOptions
+              Icon={EventSeatIcon}
+              title="Event"
+              color="#c74702"
+            />
+          </div>
+        </form>
       </div>
       {posts.map((elem) => {
         return (
