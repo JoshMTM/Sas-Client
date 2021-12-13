@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import InputOption from "./InputOptions";
+import InputFeedOptions from "./InputFeedOptions";
 import "./Feed.css";
 import Posts from "./Posts";
 import CreateIcon from "@mui/icons-material/Create";
@@ -15,7 +15,37 @@ import { selectUser } from "../../features/userSlice";
 function Feed() {
   const user = useSelector(selectUser);
   const [input, setInput] = useState("");
+  const [postImg, setpostImg] = useState(null);
   const [posts, setPosts] = useState([]);
+  const [showImg, setShowImg] = useState(false);
+
+  //Image Preview before uploading
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
+
+  // create a preview as a side effect, whenever selected file is changed
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const onSelectFile = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+
+    // I've kept this example simple by using the first image instead of multiple
+    setSelectedFile(e.target.files[0]);
+  };
 
   useEffect(() => {
     async function getPosts() {
@@ -28,9 +58,10 @@ function Feed() {
   //New posts/updates creating
   const sendPost = async (e) => {
     e.preventDefault();
-    // const imgForm = new FormData();
-    // imgForm.append("imageUrl", e.target.myImage.files[0]);
-    // const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
+    const imgForm = new FormData();
+    imgForm.append("imageUrl", e.target.myImage.files[0]);
+    const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
+    setpostImg(imgResponse.data.image);
     const day = new Date().getDay();
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
@@ -39,6 +70,7 @@ function Feed() {
       description: user.city,
       message: input,
       image: user.photoUrl,
+      ImgPost: postImg,
       date: `${day} ${month} ${year}`,
     };
     console.log(newPost.date);
@@ -50,6 +82,12 @@ function Feed() {
     setPosts([response.data, ...posts]);
     setInput("");
   };
+
+  function toggleImage(e) {
+    e.preventDefault();
+    console.log("is this working?");
+    setShowImg(!showImg);
+  }
 
   return (
     <div className="feed">
@@ -68,14 +106,48 @@ function Feed() {
           </form>
         </div>
         <div className="feed__inputOptions">
-          <InputOption
+          <InputFeedOptions
             Icon={StarPurple500Icon}
             title="Promotion"
             color="#4e2e6c"
           />
-          <InputOption Icon={ImageIcon} title="Photo" color="#4e2e6c" />
-          <InputOption Icon={SubscriptionsIcon} title="Video" color="#c74702" />
-          <InputOption Icon={EventSeatIcon} title="Event" color="#c74702" />
+          <InputFeedOptions
+            Icon={ImageIcon}
+            title="Photo"
+            color="#4e2e6c"
+            handleToggle={toggleImage}
+          />
+          {showImg ? (
+            <input
+              type="file"
+              onChange={onSelectFile}
+              name="myImage"
+              accept="image/png, image/jpg"
+            />
+          ) : (
+            ""
+          )}
+          {selectedFile && (
+            <img
+              style={{
+                width: "300px",
+                borderRadius: "20px",
+                marginTop: "10px",
+              }}
+              src={preview}
+              alt="img preview"
+            />
+          )}
+          <InputFeedOptions
+            Icon={SubscriptionsIcon}
+            title="Video"
+            color="#c74702"
+          />
+          <InputFeedOptions
+            Icon={EventSeatIcon}
+            title="Event"
+            color="#c74702"
+          />
         </div>
       </div>
       {posts.map((elem) => {
@@ -85,6 +157,7 @@ function Feed() {
             name={elem.name}
             description={elem.description}
             message={elem.message}
+            postImg={elem.ImgPost}
             image={elem.image}
           />
         );

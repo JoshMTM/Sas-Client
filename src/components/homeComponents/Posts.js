@@ -8,7 +8,7 @@ import "./Posts.css";
 import InputOptions from "./InputOptions";
 
 function Posts(props) {
-  const { name, description, message, image } = props;
+  const { name, description, message, image, postImg } = props;
   return (
     <div className="post">
       <div className="post__header">
@@ -21,6 +21,11 @@ function Posts(props) {
 
       <div className="post__body">
         <p>{message}</p>
+        {!postImg ? (
+          ""
+        ) : (
+          <img style={{ width: "200px" }} src={postImg} alt="postImage" />
+        )}
       </div>
       <div className="post__buttons">
         <InputOptions Icon={ThumbUpIcon} title="Like" color="#c74702" />
