@@ -122,6 +122,7 @@ function Feed() {
                 type="file"
                 onChange={onSelectFile}
                 value={myImage}
+                name="myImage"
                 accept="image/png, image/jpg"
               />
             ) : (
