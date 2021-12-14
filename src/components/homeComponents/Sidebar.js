@@ -2,6 +2,7 @@ import { Avatar } from "@mui/material";
 import MyCalendar from "./MyCalendar";
 import MyMap from "./MyMap";
 import "./Sidebar.css";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   const groups = (topic) => (
@@ -38,7 +39,9 @@ function Sidebar() {
       </div>
       <div className="sidebar__stats">
         <div className="sidebar__stat">
-          <p>Supported dreams: </p>
+          <Link to="/dreams">
+            <p>Supported dreams: </p>
+          </Link>
           <p className="sidebar__statNumber">150 dreams</p>
         </div>
         <div className="sidebar__stat">

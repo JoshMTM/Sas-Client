@@ -7,7 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { login, logout } from "../features/userSlice";
 
-function HomeApp() {
+function HomeApp(props) {
+  const { onLogout } = props;
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   console.log(user);
@@ -26,7 +27,7 @@ function HomeApp() {
         <SignIn />
       ) : (
         <div>
-          <Header />
+          <Header btnLogout={onLogout} />
           <div className="app__body">
             <Sidebar />
             {/*Sidebar*/}

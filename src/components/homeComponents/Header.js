@@ -1,4 +1,5 @@
 import "./Header.css";
+import { Link } from "react-router-dom";
 import HeaderOption from "../homeComponents/HeaderOption";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
@@ -9,11 +10,12 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import { ButtonGroup } from "react-bootstrap";
 
-function header() {
+function header(props) {
   return (
     <div calssName="header">
       <div className="header__left">
-        <img src="https://i.imgur.com/InCYOmV.png" alt="logo" />
+        <img src="https://i.imgur.com/cDtWOwo.png" alt="logo" />
+        <img src="https://i.imgur.com/cDtWOwo.png" alt="logo" />
 
         <div className="header__search">
           <SearchIcon />
@@ -40,10 +42,12 @@ function header() {
             />
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">View My Profile</Dropdown.Item>
+              <Dropdown.Item>
+                <Link to="/profile">View My Profile</Link>
+              </Dropdown.Item>
               <Dropdown.Item href="#/action-3">Edit Profile</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+              <Dropdown.Item>Settings</Dropdown.Item>
+              <Dropdown.Item onClick={props.btnLogout}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>

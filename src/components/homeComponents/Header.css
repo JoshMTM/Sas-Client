@@ -25,7 +25,8 @@
   display: flex;
   align-items: center;
   border-radius: 5px;
-  height: 22px;
+  width: 400px;
+  height: 45px;
   color: gray;
   background-color: #eef3f8;
 }

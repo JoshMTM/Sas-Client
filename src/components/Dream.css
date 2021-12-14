@@ -1,3 +1,9 @@
-.form-address {
-  width: 50%;
+.dreams {
+  display: flex;
+}
+.dream_box {
+  display: flex;
+}
+.dream_box > div > img {
+  width: 40%;
 }

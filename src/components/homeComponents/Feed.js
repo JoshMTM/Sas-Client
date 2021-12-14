@@ -61,7 +61,7 @@ function Feed() {
   const sendPost = async (e) => {
     e.preventDefault();
     const imgForm = new FormData();
-    console.log(e.target.value);
+    console.log(e.target.myImage);
     imgForm.append("imageUrl", e.target.myImage.files[0]);
     const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
     setpostImg(imgResponse.data.image);
@@ -84,6 +84,7 @@ function Feed() {
     console.log(response.data);
     setPosts([response.data, ...posts]);
     setInput("");
+    setShowImg(false);
   };
 
   function toggleImage(e) {

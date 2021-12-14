@@ -1,0 +1,153 @@
+#top-section-home {
+  width: 100%;
+  height: 800px;
+  text-align: center;
+  position: relative;
+}
+
+#home-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+#home-h1 {
+  animation: apparition 0.8s ease-out;
+  width: 80%;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.808);
+}
+
+#home-p {
+  font-size: 20px;
+  width: 50%;
+  animation: apparition 1s ease-out;
+}
+
+#top-section-btn {
+  padding: 10px 25px;
+  border: 4px solid #773964;
+  border-radius: 10px;
+  text-decoration: none;
+  background-color: #a15a58;
+  color: rgba(0, 0, 0, 0.74);
+  margin-top: 20px;
+  animation: apparition 1s ease-out;
+}
+
+#top-section-title {
+  width: 50%;
+  position: absolute;
+  top: 20%;
+  max-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#top-color-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(218, 216, 216, 0.753);
+  border-radius: 10px;
+  width: 80%;
+  padding: 20px;
+}
+
+#middle-container {
+  height: 100%;
+  margin-top: 50px;
+}
+
+#middle-container h2 {
+  text-align: center;
+  font-size: 30px;
+}
+
+#grid-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 650px);
+  height: auto;
+  width: 100%;
+  margin: auto;
+  max-width: 1300px;
+  background-color: #0162a3ef;
+
+  margin-top: 50px;
+}
+
+#grid-dev {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+}
+
+#grid-dev h3 {
+  font-size: 40px;
+  animation: slide 1s ease-out;
+  color: #788bff;
+}
+
+#grid-dev p {
+  font-size: 20px;
+  color: #fbf9f3ad;
+}
+
+.middle-container-downer {
+  height: 200px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.middle-container-downer p {
+  font-style: italic;
+  font-size: 25px;
+  margin-bottom: 60px;
+}
+
+@keyframes slide {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@media screen and (min-width: 901px) {
+  #home-h1 {
+    font-size: 40px;
+  }
+  #top-section-title {
+    width: 50%;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 900px) {
+  #home-h1 {
+    font-size: 20px;
+  }
+  #top-section-title {
+    width: 100%;
+  }
+}

@@ -12,7 +12,10 @@ import SignUp from "./components/homeComponents/authComponents/SignUp";
 import DreamCreation from "./components/DreamCreation";
 import Dreams from "./components/Dreams";
 import { useDispatch } from "react-redux";
-import { login } from "./features/userSlice";
+import { login, logout } from "./features/userSlice";
+import MyDreams from "./components/homeComponents/Dreams/MyDreams";
+import Welcome from "./components/welcome/Welcome";
+import Profile from "./components/Profile";
 
 function App() {
   const [dreams, setDreams] = useState([]);
@@ -22,38 +25,18 @@ function App() {
   const [myError, setError] = useState(null);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     //   let response = await axios.get(`${API_URL}/dreams`, {
-  //     //     withCredentials: true,
-  //     //   });
-  //     //   setDreams(response.data);
+  useEffect(() => {
+    const getDreams = async () => {
+      console.log("are we getting here?");
+      const response = await axios.get(`${API_URL}/dreams`, {
+        withCredentials: true,
+      });
+      console.log(response.data);
+      setDreams(response.data);
+    };
 
-  //     //-----------------------------------------------
-  //     // we make the user requst here to know if the user is logged in or not
-  //     try {
-  //       const userResponse = await axios.get(`${API_URL}/user`, {
-  //         withCredentials: true,
-  //       });
-  //       setUser(false);
-  //       dispatch(
-  //         login({
-  //           id: userResponse.data._id,
-  //           email: userResponse.data.email,
-  //           name: userResponse.data.firsName,
-  //           lastName: userResponse.data.lastName,
-  //           city: userResponse.data.city,
-  //           photoUrl: userResponse.data.image,
-  //         })
-  //       );
-  //       console.log(userResponse.data._id);
-  //     } catch (err) {
-  //       setUser(false);
-  //     }
-  //   };
-
-  //   getData();
-  // }, []);
+    getDreams();
+  }, []);
 
   const handleSignIn = async (event) => {
     event.preventDefault();
@@ -142,21 +125,31 @@ function App() {
     navigate(`/dreams/${response.data.dreamer}/items`);
   };
 
+  const handleLogout = async () => {
+    await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
+    dispatch(logout());
+  };
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<WelcomeApp />} />
+        <Route path="/welcome" element={<Welcome />} />
+
         <Route
           path="/signin"
           element={<SignIn myError={myError} onSignIn={handleSignIn} />}
         />
         <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<HomePage onLogout={handleLogout} />} />
+        <Route path="/profile" element={<Profile onLogout={handleLogout} />} />
+
         <Route
           path="/dreams/new"
           element={<DreamCreation dream={newDream} btnAddDream={submitDream} />}
         />
         <Route path="/dreams" element={<Dreams dreams={dreams} />} />
+
         <Route
           path="/dreams/:id/items"
           element={<DreamCreation dream={newDream} btnAddDream={submitDream} />}

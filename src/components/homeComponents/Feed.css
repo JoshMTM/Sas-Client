@@ -25,14 +25,14 @@
   width: 100%;
 }
 
-.feed__input > form > input {
+.feed__input > input {
   border: none;
   flex: 1;
   margin-left: 10px;
   outline-width: 0;
   font-weight: 600px;
 }
-.feed__input > form > button {
+.feed__input > button {
   width: 100px;
   border: none;
   background-color: rgb(200, 199, 104);
