@@ -13,7 +13,6 @@ import DreamCreation from "./components/DreamCreation";
 import Dreams from "./components/Dreams";
 import { useDispatch } from "react-redux";
 import { login, logout } from "./features/userSlice";
-import MyDreams from "./components/homeComponents/Dreams/MyDreams";
 import Welcome from "./components/welcome/Welcome";
 import Profile from "./components/Profile";
 
@@ -142,7 +141,7 @@ function App() {
         />
         <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
         <Route path="/home" element={<HomePage onLogout={handleLogout} />} />
-        <Route path="/profile" element={<Profile onLogout={handleLogout} />} />
+        <Route path="/profile" element={<Profile dreams={dreams} />} />
 
         <Route
           path="/dreams/new"

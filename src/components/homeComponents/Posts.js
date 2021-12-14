@@ -50,7 +50,11 @@ function Posts(props) {
         {!postImg ? (
           ""
         ) : (
-          <img style={{ width: "200px" }} src={postImg} alt="postImage" />
+          <img
+            style={{ width: "500px", borderRadius: "10px" }}
+            src={postImg}
+            alt="postImage"
+          />
         )}
       </div>
       <div className="post__buttons">

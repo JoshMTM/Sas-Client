@@ -5,6 +5,7 @@ import { selectUser } from "../features/userSlice";
 import Header from "./homeComponents/Header";
 import SignIn from "./homeComponents/authComponents/SignIn";
 import "./Profile.css";
+import DreamCarousel from "./DreamCarousel";
 
 const Profile = (props) => {
   const { dreams } = props;
@@ -38,7 +39,10 @@ const Profile = (props) => {
           <Link to="/dreams">get inspired</Link>
         </h3>
       ) : (
-        <h2>List of dreams</h2>
+        <div>
+          <h2>List of dreams</h2>
+          <DreamCarousel alldreams={dreams} />
+        </div>
       )}
     </div>
   );

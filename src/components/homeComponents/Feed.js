@@ -73,7 +73,7 @@ function Feed() {
       description: user.city,
       message: input,
       image: user.photoUrl,
-      ImgPost: postImg,
+      ImgPost: imgResponse.data.image,
       date: `${day} ${month} ${year}`,
     };
     console.log(newPost.date);

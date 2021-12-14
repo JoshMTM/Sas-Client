@@ -1,18 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
 .dreams_body {
   background-color: lightgrey;
   display: flex;
   flex-direction: column;
 }
+
+h1 {
+  font-family: "Permanent Marker", cursive;
+  color: rgb(192, 101, 45);
+}
+.dream_sidebar {
+  display: flex;
+}
 .feed {
   overflow-wrap: anywhere !important;
+}
+
+.dreams_content {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .dreams {
   display: flex;
 }
-.dream_box {
+.dream_box > div {
   display: flex;
+  flex-direction: row;
+  margin: 20px;
+  border-radius: 10px;
+  border: 2px solid rgba(228, 132, 132, 0.918);
 }
 .dream_box > div > img {
   width: 40%;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+.dream_list > p {
+  color: rgb(192, 101, 45);
+  text-decoration: none;
 }
