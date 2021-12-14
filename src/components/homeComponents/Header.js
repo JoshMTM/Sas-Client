@@ -22,8 +22,12 @@ function header(props) {
           <input type="text" />
         </div>
         <div className="header__right">
-          <HeaderOption Icon={HomeIcon} title="Home" />
-          <HeaderOption Icon={SupervisorAccountIcon} title="My Support" />
+          <Link to="/home">
+            <HeaderOption Icon={HomeIcon} title="Home" />
+          </Link>
+          <Link to="/dreams">
+            <HeaderOption Icon={SupervisorAccountIcon} title="My Support" />
+          </Link>
           <HeaderOption Icon={ChatIcon} title="Messages" />
           <HeaderOption Icon={NotificationsIcon} title="Notifications" />
           <Dropdown as={ButtonGroup}>

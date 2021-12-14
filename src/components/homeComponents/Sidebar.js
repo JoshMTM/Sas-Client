@@ -45,7 +45,9 @@ function Sidebar() {
           <p className="sidebar__statNumber">150 dreams</p>
         </div>
         <div className="sidebar__stat">
-          <p>Dreams</p>
+          <Link to="/dreams">
+            <p>Dreams</p>
+          </Link>
           <p className="sidebar__statNumber">15 dreams</p>
         </div>
       </div>

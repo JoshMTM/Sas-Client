@@ -1,0 +1,21 @@
+.profile {
+  display: flex;
+  background-color: rgb(251, 251, 251);
+  justify-content: space-evenly;
+}
+
+h1 {
+  text-align: center;
+}
+.profile_detail {
+  border-top: 7px solid rgb(136, 96, 96);
+  border-left: 7px solid rgb(136, 96, 96);
+  background-color: rgba(255, 222, 222, 0.863);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.profile_img > img {
+  border-radius: 10px;
+  width: 80%;
+}
