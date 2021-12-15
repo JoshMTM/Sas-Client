@@ -32,7 +32,6 @@ function HomeApp(props) {
             <Sidebar />
             {/*Sidebar*/}
             <Feed />
-            {/*Widget*/}
           </div>
         </div>
       )}

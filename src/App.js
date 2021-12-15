@@ -6,7 +6,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./components/HomeApp";
-import WelcomeApp from "./components/welcome/WelcomeApp";
+// import WelcomeApp from "./components/welcome/WelcomeApp";
 import SignIn from "./components/homeComponents/authComponents/SignIn";
 import SignUp from "./components/homeComponents/authComponents/SignUp";
 import DreamCreation from "./components/DreamCreation";
@@ -150,8 +150,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<WelcomeApp />} />
-        <Route path="/welcome" element={<Welcome />} />
+        {/* <Route path="/welcome" element={<WelcomeApp />} /> */}
+        <Route path="/" element={<Welcome />} />
 
         <Route path="/signin" element={<SignIn myError={myError} />} />
         <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
