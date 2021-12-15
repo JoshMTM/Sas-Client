@@ -9,8 +9,12 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import { ButtonGroup } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
 
-function header(props) {
+function Header(props) {
+  const user = useSelector(selectUser);
+
   return (
     <div calssName="header">
       <div className="header__left">
@@ -32,10 +36,7 @@ function header(props) {
           <HeaderOption Icon={NotificationsIcon} title="Notifications" />
           <Dropdown as={ButtonGroup}>
             <Button variant="link">
-              <HeaderOption
-                avatar="https://i.imgur.com/ZnC8cDv.jpg"
-                title="me"
-              />
+              <HeaderOption avatar={user.photoUrl} title="me" />
             </Button>
 
             <Dropdown.Toggle
@@ -60,4 +61,4 @@ function header(props) {
   );
 }
 
-export default header;
+export default Header;

@@ -1,12 +1,12 @@
 import { Avatar } from "@mui/material";
-import MyCalendar from "./MyCalendar";
-import MyMap from "./MyMap";
-import "./Sidebar.css";
+// import MyCalendar from "./MyCalendar";
+// import MyMap from "./MyMap";
+import "./ProfileSidebar.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../features/userSlice";
+import { selectUser } from "../features/userSlice";
 
-function Sidebar() {
+function ProfileSidebar() {
   const user = useSelector(selectUser);
   const groups = (topic) => (
     <div className="sidebar__groups">
@@ -51,14 +51,10 @@ function Sidebar() {
           <p className="sidebar__statNumber">15 dreams</p>
         </div>
       </div>
-      <div className="calendar">
-        <MyCalendar />
-      </div>
-      <div className="map">
-        <MyMap />
-      </div>
+      <div className="calendar">{/* <MyCalendar /> */}</div>
+      <div className="map">{/* <MyMap /> */}</div>
     </div>
   );
 }
 
-export default Sidebar;
+export default ProfileSidebar;

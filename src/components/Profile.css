@@ -1,3 +1,10 @@
+.profile_body {
+  background-color: rgb(245, 216, 209);
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
 .profile {
   display: flex;
   background-color: rgb(251, 251, 251);
@@ -6,6 +13,7 @@
 
 h1 {
   text-align: center;
+  margin: 10px;
 }
 .profile_detail {
   border-top: 7px solid rgb(136, 96, 96);
@@ -13,9 +21,14 @@ h1 {
   background-color: rgba(255, 222, 222, 0.863);
   border-radius: 10px;
   padding: 8px;
+  margin: 10px;
 }
 
 .profile_img > img {
   border-radius: 10px;
   width: 80%;
+  margin: 10px;
+}
+.dream_sidebar {
+  display: flex;
 }

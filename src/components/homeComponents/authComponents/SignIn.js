@@ -68,7 +68,9 @@ function SignIn(props) {
           firstName: response.data.firstName,
           lastName: response.data.lastName,
           city: response.data.city,
+          country: response.data.country,
           photoUrl: response.data.image,
+          userId: response.data._id,
         })
       );
     } catch (err) {

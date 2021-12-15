@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InputFeedOptions from "./InputFeedOptions";
+// import ChatPage from "../ChatPage";
+// import UserList from "../UserList";
 import "./Feed.css";
 import Posts from "./Posts";
 import CreateIcon from "@mui/icons-material/Create";
-import ImageIcon from "@mui/icons-material/Image";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import EventSeatIcon from "@mui/icons-material/EventSeat";
@@ -110,12 +112,12 @@ function Feed() {
             <InputFeedOptions
               Icon={StarPurple500Icon}
               title="Promotion"
-              color="#4e2e6c"
+              color="rgb(192, 101, 45)"
             />
             <InputFeedOptions
-              Icon={ImageIcon}
+              Icon={AddAPhotoIcon}
               title="Photo"
-              color="#4e2e6c"
+              color="rgb(192, 101, 45)"
               handleToggle={toggleImage}
             />
             {showImg ? (
@@ -165,6 +167,7 @@ function Feed() {
           />
         );
       })}
+      {/* <ChatPage /> */}
     </div>
   );
 }

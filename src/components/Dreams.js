@@ -1,5 +1,8 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import EditLocationAltIcon from "@mui/icons-material/EditLocationAlt";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ShareIcon from "@mui/icons-material/Share";
 import "./Dream.css";
 import "./homeComponents/Feed.css";
 import { Link } from "react-router-dom";
@@ -14,11 +17,7 @@ function Dreams(props) {
   console.log(dreams);
 
   const myDreams = dreams.filter((dream) => {
-    if (!user) {
-      return "Please Login in first";
-    } else {
-      return dream.dreamer === user._id;
-    }
+    return dream.dreamer._id == user.userId;
   });
   return (
     <div className="dreams_body">
@@ -42,6 +41,45 @@ function Dreams(props) {
                             <h3>{dream.title}</h3>
                             <p>{dream.description}</p>
                             <h3>Item list:</h3>
+                            <p>Supports: </p>
+                          </div>
+                          <div className="btn_control">
+                            <Link
+                              to="/dreams/new"
+                              style={{
+                                margin: "8px",
+                                color: "rgb(192, 101, 45)",
+                              }}
+                            >
+                              <AddCircleIcon />
+                            </Link>
+                            <Link
+                              to={`/dreams/${dream._id}/edit`}
+                              style={{
+                                margin: "8px",
+                                color: "rgb(192, 101, 45)",
+                              }}
+                            >
+                              <EditLocationAltIcon />
+                            </Link>
+                            <Link
+                              to={`/dreams/${dream._id}/delete`}
+                              style={{
+                                margin: "8px",
+                                color: "rgb(192, 101, 45)",
+                              }}
+                            >
+                              <DeleteIcon />
+                            </Link>
+                            <Link
+                              to={`/dreams/${dream._id}/send`}
+                              style={{
+                                margin: "8px",
+                                color: "rgb(192, 101, 45)",
+                              }}
+                            >
+                              <ShareIcon />
+                            </Link>
                           </div>
                         </div>
                       </div>

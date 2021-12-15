@@ -1,5 +1,6 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function DreamCarousel(props) {
   const { alldreams } = props;
@@ -9,17 +10,19 @@ function DreamCarousel(props) {
         {alldreams.map((elem) => {
           return (
             <div>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src={elem.image}
-                  alt="First slide"
-                />
-                <Carousel.Caption>
-                  <h3>{elem.title}</h3>
-                  <p>{elem.description}</p>
-                </Carousel.Caption>
-              </Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={elem.image}
+                alt="First slide"
+                style={{ width: "400px" }}
+              />
+              <h3>{elem.title} by</h3>
+              <h2>
+                <i>
+                  {elem.dreamer.firstName} in {elem.dreamer.city}
+                </i>
+              </h2>
+              <p>{elem.description}</p>
             </div>
           );
         })}

@@ -5,7 +5,7 @@ function InputFeedOptions(props) {
   return (
     <div className="inputOption">
       <Icon style={{ color: color }} onClick={handleToggle} />
-      <h4>{title}</h4>
+      <h4 style={{ color: "rgb(97, 149, 112)" }}>{title}</h4>
     </div>
   );
 }

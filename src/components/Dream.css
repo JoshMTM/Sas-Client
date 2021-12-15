@@ -42,3 +42,11 @@ h1 {
   color: rgb(192, 101, 45);
   text-decoration: none;
 }
+
+.btn_control {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-left: auto;
+}

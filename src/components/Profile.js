@@ -6,6 +6,8 @@ import Header from "./homeComponents/Header";
 import SignIn from "./homeComponents/authComponents/SignIn";
 import "./Profile.css";
 import DreamCarousel from "./DreamCarousel";
+// import Sidebar from "./homeComponents/Sidebar";
+import ProfileSidebar from "./ProfileSidebar";
 
 const Profile = (props) => {
   const { dreams } = props;
@@ -13,21 +15,24 @@ const Profile = (props) => {
   console.log(user);
 
   return (
-    <div>
+    <div className="profile_body">
       {!user ? (
         <SignIn />
       ) : (
         <>
           <Header />
-          <h1>Profile Page</h1>
-          <div className="profile">
-            <div className="profile_detail">
-              <h3>First name: {user.firstName}</h3>
-              <h3>Last name: {user.lastName}</h3>
-              <h5>City: {user.city}</h5>
-            </div>
-            <div className="profile_img">
-              <img src={user.photoUrl} alt="userphoto" />
+          <h1>Your Profile</h1>
+          <div className="dream_sidebar">
+            <ProfileSidebar />
+            <div className="profile">
+              <div className="profile_detail">
+                <h3>First name: {user.firstName}</h3>
+                <h3>Last name: {user.lastName}</h3>
+                <h5>City: {user.city}</h5>
+              </div>
+              <div className="profile_img">
+                <img src={user.photoUrl} alt="userphoto" />
+              </div>
             </div>
           </div>
         </>
@@ -40,7 +45,7 @@ const Profile = (props) => {
         </h3>
       ) : (
         <div>
-          <h2>List of dreams</h2>
+          <h2>Your dreams</h2>
           <DreamCarousel alldreams={dreams} />
         </div>
       )}
