@@ -24,16 +24,27 @@ const Profile = (props) => {
           <Header />
           <h1>Your Profile</h1>
           <div className="dream_sidebar">
-            <ProfileSidebar />
-            <div className="profile">
-              <div className="profile_detail">
-                <h3>First name: {user.firstName}</h3>
-                <h3>Last name: {user.lastName}</h3>
-                <h5>City: {user.city}</h5>
+            <div className="sidebar_profile">
+              <ProfileSidebar />
+            </div>
+            <div className="dream_feed">
+              <div className="profile">
+                <div className="profile_detail">
+                  <h3>First name: {user.firstName}</h3>
+                  <h3>Last name: {user.lastName}</h3>
+                  <h5>City: {user.city}</h5>
+                </div>
+                <div className="profile_img">
+                  <img src={user.photoUrl} alt="userphoto" />
+                </div>
+                <p>
+                  I love roses, flowers and all kinds of colours. Who wants to
+                  help building my dream garden?
+                </p>
               </div>
-              <div className="profile_img">
-                <img src={user.photoUrl} alt="userphoto" />
-              </div>
+            </div>
+            <div className="calendar">
+              <MyCalTest />
             </div>
           </div>
         </>
@@ -45,7 +56,6 @@ const Profile = (props) => {
             <Link to="/dreams/new">create one here</Link> or{" "}
             <Link to="/dreams">get inspired</Link>
           </h3>
-          <MyCalTest />
         </div>
       ) : (
         <div>

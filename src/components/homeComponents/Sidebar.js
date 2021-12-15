@@ -1,7 +1,7 @@
 import { Avatar } from "@mui/material";
 // import MyCalendar from "./MyCalendar";
-import MyCalTest from "./MyCalTest";
-import MyMap from "./MyMap";
+// import MyCalTest from "./MyCalTest";
+// import MyMap from "./MyMap";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -54,11 +54,9 @@ function Sidebar() {
       </div>
       <div className="calendar">
         {/* <MyCalendar /> */}
-        <MyCalTest />
+        {/* <MyCalTest /> */}
       </div>
-      <div className="map">
-        <MyMap />
-      </div>
+      <div className="map">{/* <MyMap /> */}</div>
     </div>
   );
 }

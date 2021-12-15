@@ -38,40 +38,53 @@ function App() {
     getDreams();
   }, []);
 
-  const handleSignIn = async (event) => {
-    event.preventDefault();
-    console.log("whats happening here?");
-    try {
-      const newUser = {
-        email: event.target.email.value,
-        password: event.target.password.value,
-      };
-      console.log("am i getting here?");
-      const response = await axios.post(`${API_URL}/signin`, newUser, {
-        withCredentials: true,
-      });
-      console.log(response.data);
-      dispatch(
-        login({
-          email: response.data.email,
-          name: response.data.firsName,
-          lastName: response.data.lastName,
-          city: response.data.city,
-          photoUrl: response.data.image,
-        })
-      );
-    } catch (err) {
-      setError(err.response.data.error);
-    }
-    navigate("/home");
-  };
+  // const handleSignIn = async (event) => {
+  //   event.preventDefault();
+  //   console.log("whats happening here?");
+  //   try {
+  //     const newUser = {
+  //       email: event.target.email.value,
+  //       password: event.target.password.value,
+  //     };
+  //     console.log("am i getting here?");
+  //     const response = await axios.post(`${API_URL}/signin`, newUser, {
+  //       withCredentials: true,
+  //     });
+  //     console.log(response.data);
+  //     dispatch(
+  //       login({
+  //         email: response.data.email,
+  //         firstName: response.data.firsName,
+  //         lastName: response.data.lastName,
+  //         country: response.data.country,
+  //         city: response.data.city,
+  //         photoUrl: response.data.image,
+  //         lat: response.data.lat,
+  //         lon: response.data.lon,
+  //       })
+  //     );
+  //   } catch (err) {
+  //     setError(err.response.data.error);
+  //   }
+  //   navigate("/home");
+  // };
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+    //Upload the image
     const imgForm = new FormData();
     imgForm.append("imageUrl", event.target.myImage.files[0]);
     console.log(event.target.myImage.files[0]);
     const imgResponse = await axios.post(`${API_URL}/upload`, imgForm);
+
+    //Get the city value to use for coordinates
+    const city = event.target.city.value;
+
+    //Get the latitude and longitude for the city
+    const CoordinatesRes = await axios.get(
+      `https://nominatim.openstreetmap.org/search/${city}?format=json&addressdetails=1&limit=1&polygon_svg=1`
+    );
+    const data = CoordinatesRes.data[0];
     let newUser = {
       firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
@@ -80,7 +93,9 @@ function App() {
       image: imgResponse.data.image,
       addressline: event.target.addressline.value,
       zipCode: event.target.zipCode.value,
-      city: event.target.city.value,
+      city: city,
+      lat: data.lat,
+      lon: data.lon,
       state: event.target.state.value,
       country: event.target.country.value,
     };
@@ -92,10 +107,13 @@ function App() {
     dispatch(
       login({
         email: response.data.email,
-        name: response.data.firsName,
+        firstName: response.data.firstName,
         lastName: response.data.lastName,
+        country: response.data.country,
         city: response.data.city,
         photoUrl: response.data.image,
+        lat: response.data.lat,
+        lon: response.data.lon,
       })
     );
 
@@ -120,8 +138,7 @@ function App() {
     });
     setDreams([response.data, ...dreams]);
     setNewDream(response.data);
-    console.log(response.data);
-    // navigate("/");
+    // console.log(response.data);
     navigate(`/dreams/${response.data.dreamer}/items`);
   };
 
@@ -136,10 +153,7 @@ function App() {
         <Route path="/" element={<WelcomeApp />} />
         <Route path="/welcome" element={<Welcome />} />
 
-        <Route
-          path="/signin"
-          element={<SignIn myError={myError} onSignIn={handleSignIn} />}
-        />
+        <Route path="/signin" element={<SignIn myError={myError} />} />
         <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
         <Route path="/home" element={<HomePage onLogout={handleLogout} />} />
         <Route path="/profile" element={<Profile dreams={dreams} />} />

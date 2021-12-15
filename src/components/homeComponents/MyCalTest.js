@@ -53,8 +53,8 @@ export default class DemoApp extends React.Component {
           <h2>Instructions</h2>
           <ul>
             <li>
-              Select dates and save the dates that you want to be reminded of
-              your dreams and those you are supporting
+              Select and save the dates that you want to be reminded of your
+              dreams and those you are supporting
             </li>
             <li>Drag, drop, and resize events</li>
             <li>Click an event to delete it</li>

@@ -50,7 +50,6 @@ function SignIn(props) {
 
   const handleSignIn = async (event) => {
     event.preventDefault();
-    console.log("whats happening here?");
     try {
       console.log("am i getting here?");
       const response = await axios.post(
@@ -66,9 +65,11 @@ function SignIn(props) {
           email: response.data.email,
           firstName: response.data.firstName,
           lastName: response.data.lastName,
-          city: response.data.city,
           country: response.data.country,
+          city: response.data.city,
           photoUrl: response.data.image,
+          lat: response.data.lat,
+          lon: response.data.lon,
           userId: response.data._id,
         })
       );
