@@ -9,7 +9,6 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 // import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -110,11 +109,15 @@ function SignIn(props) {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "lightBlue" }}>
-              <LockOutlinedIcon />
+            <Avatar sx={{ m: 1, bgcolor: "lightGray" }}>
+              <img
+                style={{ width: "70px" }}
+                src="https://i.imgur.com/kI8k5U8.png"
+                alt="logIn"
+              />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sas In
             </Typography>
             <Box
               component="form"
@@ -155,11 +158,11 @@ function SignIn(props) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Sas In
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link to="/signup">{"No account yet? Sign Up"}</Link>
+                  <Link to="/signup">{"No account yet? Sas Up then"}</Link>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

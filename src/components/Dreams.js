@@ -91,7 +91,7 @@ function Dreams(props) {
                     return (
                       <div className="dream_list">
                         <Link
-                          to="/dream/details"
+                          to={`/dreams/${elem._id}`}
                           style={{
                             paddingLeft: "13px",
                             textDecoration: "none",

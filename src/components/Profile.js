@@ -8,6 +8,7 @@ import "./Profile.css";
 import DreamCarousel from "./DreamCarousel";
 // import Sidebar from "./homeComponents/Sidebar";
 import ProfileSidebar from "./ProfileSidebar";
+import MyCalTest from "./homeComponents/MyCalTest";
 
 const Profile = (props) => {
   const { dreams } = props;
@@ -38,11 +39,14 @@ const Profile = (props) => {
         </>
       )}
       {!dreams ? (
-        <h3>
-          Your list of dreams is empty, you can{" "}
-          <Link to="/dreams/new">create one here</Link> or{" "}
-          <Link to="/dreams">get inspired</Link>
-        </h3>
+        <div>
+          <h3>
+            Your list of dreams is empty, you can{" "}
+            <Link to="/dreams/new">create one here</Link> or{" "}
+            <Link to="/dreams">get inspired</Link>
+          </h3>
+          <MyCalTest />
+        </div>
       ) : (
         <div>
           <h2>Your dreams</h2>

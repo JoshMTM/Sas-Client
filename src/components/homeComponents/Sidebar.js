@@ -1,5 +1,6 @@
 import { Avatar } from "@mui/material";
-import MyCalendar from "./MyCalendar";
+// import MyCalendar from "./MyCalendar";
+import MyCalTest from "./MyCalTest";
 import MyMap from "./MyMap";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
@@ -52,7 +53,8 @@ function Sidebar() {
         </div>
       </div>
       <div className="calendar">
-        <MyCalendar />
+        {/* <MyCalendar /> */}
+        <MyCalTest />
       </div>
       <div className="map">
         <MyMap />

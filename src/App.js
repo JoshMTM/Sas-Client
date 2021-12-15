@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "./features/userSlice";
 import Welcome from "./components/welcome/Welcome";
 import Profile from "./components/Profile";
+import DreamDetails from "./components/DreamDetails";
 
 function App() {
   const [dreams, setDreams] = useState([]);
@@ -148,6 +149,10 @@ function App() {
           element={<DreamCreation dream={newDream} btnAddDream={submitDream} />}
         />
         <Route path="/dreams" element={<Dreams dreams={dreams} />} />
+        <Route
+          path="/dreams/:dreamId"
+          element={<DreamDetails dreams={dreams} />}
+        />
 
         <Route
           path="/dreams/:id/items"

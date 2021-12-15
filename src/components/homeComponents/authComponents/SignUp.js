@@ -9,7 +9,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -61,10 +60,14 @@ function SignUp(props) {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
+              <img
+                style={{ width: "70px" }}
+                src="https://i.imgur.com/kI8k5U8.png"
+                alt="logIn"
+              />
             </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign up
+            <Typography component="h1" variant="h4">
+              SAS UP
             </Typography>
             <Box component="form" noValidate onSubmit={onSignUp} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
@@ -197,12 +200,12 @@ function SignUp(props) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                Sas Up
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link to="/signin" variant="body2">
-                    Already have an account? Sign in
+                    Already have an account? Sas In instead
                   </Link>
                 </Grid>
               </Grid>
