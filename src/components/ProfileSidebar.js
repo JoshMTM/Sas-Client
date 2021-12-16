@@ -34,7 +34,7 @@ function ProfileSidebar() {
         <a href="students.com">
           {groups("Students with dissability support campain")}
         </a>
-        <a href="students.com">{groups("Training Amsterdam 2020")}</a>
+        <a href="groups=?training">{groups("Training Amsterdam 2020")}</a>
       </div>
       <div className="sidebar__stats">
         <div className="sidebar__stat">

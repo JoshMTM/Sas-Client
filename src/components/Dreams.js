@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import Header from "./homeComponents/Header";
 import Sidebar from "./homeComponents/Sidebar";
+import MyMap from "./homeComponents/MyMap";
 
 function Dreams(props) {
   const user = useSelector(selectUser);
@@ -17,7 +18,7 @@ function Dreams(props) {
   console.log(dreams);
 
   const myDreams = dreams.filter((dream) => {
-    return dream.dreamer._id == user.userId;
+    return dream.dreamer == user.userId;
   });
   return (
     <div className="dreams_body">
@@ -82,6 +83,7 @@ function Dreams(props) {
                             </Link>
                           </div>
                         </div>
+                        <MyMap />
                       </div>
                     );
                   })}

@@ -11,7 +11,7 @@ function MyMap() {
   const [users, setUsers] = useState([]);
   const sasLogo = new L.Icon({
     iconUrl: "https://i.imgur.com/cDtWOwo.png",
-    iconSize: [15, 20],
+    iconSize: [25, 30],
   });
   //Some users co-ordinate
   useEffect(() => {
@@ -22,9 +22,8 @@ function MyMap() {
     }
     userData();
   }, []);
-  const position = [61.505, -0.09];
+  const position = [41.505, -0.9];
   function findPosition(lat, lon) {
-    console.log(lat);
     const position = [lat, lon];
     return position;
   }
