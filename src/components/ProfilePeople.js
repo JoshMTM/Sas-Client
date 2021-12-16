@@ -46,7 +46,7 @@ const Profile = (props) => {
                   <h5>City: {user.city}</h5>
                 </div>
                 <div className="profile_img">
-                  <img src={user.photoUrl} alt="userphoto" />
+                  <img src={user.image} alt="userphoto" />
                 </div>
                 <p>
                   I love roses, flowers and all kinds of colours. Who wants to

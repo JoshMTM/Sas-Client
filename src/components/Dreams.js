@@ -18,7 +18,7 @@ function Dreams(props) {
   console.log(dreams);
 
   const myDreams = dreams.filter((dream) => {
-    return dream.dreamer == user.userId;
+    return dream.dreamer._id == user.userId;
   });
   return (
     <div className="dreams_body">
@@ -33,65 +33,74 @@ function Dreams(props) {
               <h1>Your Dream Space</h1>
               <div className="dreams_content">
                 <div>
-                  {myDreams.map((dream) => {
-                    return (
-                      <div className="dream_box">
-                        <div>
-                          <img alt="dreamImg" src={dream.image} />
-                          <div className="dream_desc">
-                            <h3>{dream.title}</h3>
-                            <p>{dream.description}</p>
-                            <h3>Item list:</h3>
-                            <p>Supports: </p>
-                          </div>
-                          <div className="btn_control">
-                            <Link
-                              to="/dreams/new"
-                              style={{
-                                margin: "8px",
-                                color: "rgb(192, 101, 45)",
-                              }}
-                            >
-                              <AddCircleIcon />
-                            </Link>
-                            <Link
-                              to={`/dreams/${dream._id}/edit`}
-                              style={{
-                                margin: "8px",
-                                color: "rgb(192, 101, 45)",
-                              }}
-                            >
-                              <EditLocationAltIcon />
-                            </Link>
-                            <Link
-                              to={`/dreams/${dream._id}/delete`}
-                              style={{
-                                margin: "8px",
-                                color: "rgb(192, 101, 45)",
-                              }}
-                            >
-                              <DeleteIcon />
-                            </Link>
-                            <Link
-                              to={`/dreams/${dream._id}/send`}
-                              style={{
-                                margin: "8px",
-                                color: "rgb(192, 101, 45)",
-                              }}
-                            >
-                              <ShareIcon />
-                            </Link>
+                  <div>
+                    {myDreams.map((dream) => {
+                      return (
+                        <div key={dream._id}>
+                          <div className="dream_box">
+                            <div>
+                              <img alt="dreamImg" src={dream.image} />
+                              <div className="dream_desc">
+                                <h3>{dream.title}</h3>
+                                <p>{dream.description}</p>
+                                <h3>Item list:</h3>
+                                <p>Supports: </p>
+                              </div>
+                              <div className="btn_control">
+                                <Link
+                                  to="/dreams/new"
+                                  style={{
+                                    margin: "8px",
+                                    color: "rgb(192, 101, 45)",
+                                  }}
+                                >
+                                  <AddCircleIcon />
+                                </Link>
+                                <Link
+                                  to={`/dreams/${dream._id}/edit`}
+                                  style={{
+                                    margin: "8px",
+                                    color: "rgb(192, 101, 45)",
+                                  }}
+                                >
+                                  <EditLocationAltIcon />
+                                </Link>
+                                <Link
+                                  to={`/dreams/${dream._id}/delete`}
+                                  style={{
+                                    margin: "8px",
+                                    color: "rgb(192, 101, 45)",
+                                  }}
+                                >
+                                  <DeleteIcon />
+                                </Link>
+                                <Link
+                                  to={`/dreams/${dream._id}/send`}
+                                  style={{
+                                    margin: "8px",
+                                    color: "rgb(192, 101, 45)",
+                                  }}
+                                >
+                                  <ShareIcon />
+                                </Link>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <MyMap />
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
+                  <div>
+                    <h2 style={{ textAlign: "center" }}>
+                      Check out the dreamers near you
+                    </h2>
+                    <MyMap />
+                  </div>
                 </div>
                 <div className="allDreams">
                   {dreams.map((elem) => {
                     return (
-                      <div className="dream_list">
+                      <div key={elem._id} className="dream_list">
                         <Link
                           to={`/dreams/${elem._id}`}
                           style={{

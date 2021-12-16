@@ -1,11 +1,8 @@
 import React from "react";
-// import { Grid, Button, Divider } from "@material-ui/core";
-// import { Redirect } from "react";
 import { Link } from "react-router-dom";
 import "./Welcome.css";
 import WelcomeHeader from "./WelcomeHeader";
 import NavWelcome from "./NavWelcome";
-// import NavBar from "./NavBar";
 
 function Welcome(props) {
   //   const { user } = props;
@@ -62,11 +59,11 @@ function Welcome(props) {
             </p>
           </div>
           <div id="grid-dev" className="color-change">
-            <h3> Preview </h3>
+            <h2> Preview </h2>
           </div>
           <div id="grid-dev" className="color-change">
             <img
-              style={{ width: "200px" }}
+              style={{ width: "200px", marginRight: "20px" }}
               src="https://i.imgur.com/BQ2jzIC.jpg"
               alt="gardendream"
             />
@@ -74,13 +71,12 @@ function Welcome(props) {
               I love roses, flowers and all kinds of colours. Who wants to help
               building my dream garden?
             </p>
-            <h5>Items needed</h5>
           </div>
         </div>
         <div className="middle-container-downer">
           <p>
-            "Individually we are one drop. Together, we are an ocean" Ryunosuke
-            Satoro
+            "Whatever you can do, or dream you can, begin it. Boldness has
+            genius, power, and magic in it." — Johann Wolfgang von Goethe
           </p>
           <Link to="/signup" id="top-section-btn" className="downer-home-btn">
             Get Started!

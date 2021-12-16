@@ -17,6 +17,7 @@ import Welcome from "./components/welcome/Welcome";
 import Profile from "./components/Profile";
 import DreamDetails from "./components/DreamDetails";
 import ProfilePeople from "./components/ProfilePeople";
+import PagenotFound from "./components/PagenotFound";
 
 function App() {
   const [dreams, setDreams] = useState([]);
@@ -153,6 +154,7 @@ function App() {
       <Routes>
         {/* <Route path="/welcome" element={<WelcomeApp />} /> */}
         <Route path="/" element={<Welcome />} />
+        <Route path="*" element={<PagenotFound />} />
 
         <Route path="/signin" element={<SignIn myError={myError} />} />
         <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />

@@ -22,7 +22,7 @@ function Sidebar() {
         <img src="https://i.imgur.com/rzkUpkK.jpg" alt="bgService" />
         <Avatar className="sidebar__avatar" src={user.photoUrl} />
         <h2>{`${user.firstName} ${user.lastName}`}</h2>
-        <h4>Certified Electrician</h4>
+        <h4>{user.city}</h4>
       </div>
 
       <div className="sidebar__bottom">

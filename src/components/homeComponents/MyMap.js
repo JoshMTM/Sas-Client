@@ -17,7 +17,6 @@ function MyMap() {
   useEffect(() => {
     async function userData() {
       const response = await axios.get(`${API_URL}/users`);
-      console.log(response.data);
       setUsers(response.data);
     }
     userData();
@@ -48,7 +47,7 @@ function MyMap() {
         />
         {users.map((elem) => {
           return (
-            <div>
+            <div key={elem._id}>
               <Marker
                 position={findPosition(elem.lat, elem.lon)}
                 icon={sasLogo}
