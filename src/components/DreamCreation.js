@@ -9,7 +9,7 @@ function DreamCreation(props) {
   const { btnAddDream, dream } = props;
 
   return (
-    <div style={{ margin: "20px" }}>
+    <div className="dreamC" style={{ margin: "20px" }}>
       <h2>Would you like to share your dream with the World?</h2>
       <h2>Share your dream</h2>
       <Link to="/home">

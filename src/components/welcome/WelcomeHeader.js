@@ -1,4 +1,4 @@
-import "../homeComponents/Header.css";
+import "./HeaderWelcome.css";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 // import HomeIcon from "@mui/icons-material/Home";
@@ -10,22 +10,29 @@ function WelcomeHeader(props) {
   return (
     <div calssName="header">
       <div className="header__left">
-        <img
-          style={{ width: "100px" }}
-          src="https://i.imgur.com/VKECXjR.png"
-          alt="logo"
-        />
-
-        <div className="header__search">
-          <SearchIcon />
-          <input type="text" />
+        <div>
+          <img
+            style={{ width: "230px", marginLeft: "20px" }}
+            src="https://i.imgur.com/aeC4ID6.png"
+            alt="logo"
+          />
+        </div>
+        <div className="img_middle">
+          <img src="https://i.imgur.com/cDtWOwo.png" alt="logo" />
         </div>
         <div className="header__right">
           <Link
             to="/signin"
             style={{ marginRight: "10px", textDecoration: "none" }}
           >
-            <Button style={{ color: "green" }} endIcon={<SendIcon />}>
+            <Button
+              style={{
+                color: "rgb(97, 149, 112)",
+                fontSize: "20px",
+                fontWeight: "bold",
+              }}
+              endIcon={<SendIcon />}
+            >
               Signin
             </Button>
           </Link>
@@ -36,7 +43,14 @@ function WelcomeHeader(props) {
             }}
             to="/signup"
           >
-            <Button style={{ color: "green" }} endIcon={<JoinFullIcon />}>
+            <Button
+              style={{
+                color: "rgb(97, 149, 112)",
+                fontSize: "20px",
+                fontWeight: "bold",
+              }}
+              endIcon={<JoinFullIcon />}
+            >
               Signup
             </Button>
           </Link>

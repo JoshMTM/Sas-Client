@@ -33,7 +33,7 @@ const Profile = (props) => {
       ) : (
         <>
           <Header />
-          <h1>Your Profile</h1>
+          <h1>{user.firstName}'s Profile</h1>
           <div className="dream_sidebar">
             <div className="sidebar_profile">
               <ProfileSidebar />

@@ -49,11 +49,17 @@ function Items(props) {
         {!newDream ? (
           "Please create a dream before adding items"
         ) : (
-          <div>
-            <img src={newDream.image} alt="dream" style={{ width: "250px" }} />
-            <div className="carousel_right">
-              <h3>{newDream.title}</h3>
-              <p>{newDream.description}</p>
+          <div className="newD_card">
+            <div>
+              <div className="carousel_right">
+                <h3>{newDream.title}</h3>
+                <p>{newDream.description}</p>
+              </div>
+              <img
+                src={newDream.image}
+                alt="dream"
+                style={{ width: "250px", borderRadius: "15px" }}
+              />
             </div>
             <div>
               <h1>{newDream.title}'s needed items</h1>

@@ -21,7 +21,9 @@ function Sidebar() {
       <div className="sidebar__top">
         <img src="https://i.imgur.com/rzkUpkK.jpg" alt="bgService" />
         <Avatar className="sidebar__avatar" src={user.photoUrl} />
-        <h2>{`${user.firstName} ${user.lastName}`}</h2>
+        <Link to="/profile">
+          <h2>{`${user.firstName} ${user.lastName}`}</h2>
+        </Link>
         <h4>{user.city}</h4>
       </div>
 

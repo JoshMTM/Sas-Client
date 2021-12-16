@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "./config";
 import "./App.css";
@@ -25,7 +25,9 @@ function App() {
   const navigate = useNavigate();
   // const [fetchUser, setUser] = useState(true);
   const [myError, setError] = useState(null);
+  const [dreamDetail, setDreamDetail] = useState(null);
   const dispatch = useDispatch();
+  const { dreamId } = useParams();
 
   useEffect(() => {
     const getDreams = async () => {
@@ -119,7 +121,7 @@ function App() {
       })
     );
 
-    navigate("/home");
+    navigate("/dreams/new");
   };
 
   const submitDream = async (event) => {
@@ -149,6 +151,16 @@ function App() {
     dispatch(logout());
   };
 
+  const getDream = async () => {
+    // Fetching info for a dream
+    let response = await axios.get(`${API_URL}/dreams/${dreamId}`, {
+      withCredentials: true,
+    });
+    console.log(response.data.items);
+    setDreamDetail(response.data);
+  };
+  getDream();
+
   return (
     <div className="App">
       <Routes>
@@ -172,7 +184,7 @@ function App() {
         <Route path="/dreams" element={<Dreams dreams={dreams} />} />
         <Route
           path="/dreams/:dreamId"
-          element={<DreamDetails dreams={dreams} />}
+          element={<DreamDetails dreamOne={dreamDetail} />}
         />
 
         <Route

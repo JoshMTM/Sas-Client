@@ -4,21 +4,20 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import ShareIcon from "@mui/icons-material/Share";
 import React, { useState } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 import "./Posts.css";
 import InputOptions from "./InputOptions";
-import { API_URL } from "../../config";
 
 function Posts(props) {
   const [showComment, setShowComment] = useState(false);
-  const { name, description, message, image, postImg } = props;
+  const { name, description, message, image, postImg, id } = props;
   const [likeColor, setLikeColor] = useState("#C13A19");
 
   function handleComment() {
     setShowComment(!showComment);
   }
   function likeButton() {
-    console.log("color?? is this working????");
+    // console.log("color?? is this working????");
     setLikeColor("#319917");
   }
 
@@ -40,7 +39,9 @@ function Posts(props) {
       <div className="post__header">
         <Avatar src={image} />
         <div className="post__info">
-          <h2>{name}</h2>
+          <Link to={`/profile`}>
+            <h2>{name}</h2>
+          </Link>
           <p>{description}</p>
         </div>
       </div>
@@ -60,7 +61,7 @@ function Posts(props) {
       <div className="post__buttons">
         <InputOptions
           Icon={ThumbUpIcon}
-          title="Like"
+          title="Sas"
           color={likeColor}
           onClick={likeButton}
         />

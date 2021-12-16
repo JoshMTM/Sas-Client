@@ -10,6 +10,11 @@ h1 {
   font-family: "Permanent Marker", cursive;
   color: rgb(192, 101, 45);
 }
+
+h2 {
+  font-size: 1.5em;
+  text-align: center;
+}
 .dream_sidebar {
   display: flex;
 }
