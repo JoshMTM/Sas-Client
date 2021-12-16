@@ -3,7 +3,8 @@ import React from "react";
 // import { Redirect } from "react";
 import { Link } from "react-router-dom";
 import "./Welcome.css";
-// import MiniNavBar from "./MiniNavBar";
+import WelcomeHeader from "./WelcomeHeader";
+import NavWelcome from "./NavWelcome";
 // import NavBar from "./NavBar";
 
 function Welcome(props) {
@@ -11,7 +12,8 @@ function Welcome(props) {
 
   return (
     <>
-      {/* <MiniNavBar /> */}
+      <WelcomeHeader />
+      <NavWelcome />
       <div id="top-section-home">
         <div id="top-section-title">
           <div id="top-color-image">

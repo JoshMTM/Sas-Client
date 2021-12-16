@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import HeaderOption from "../homeComponents/HeaderOption";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
+import SendIcon from "@mui/icons-material/Send";
+import JoinFullIcon from "@mui/icons-material/JoinFull";
+import Button from "@mui/material/Button";
 
 function WelcomeHeader(props) {
   return (
@@ -16,8 +19,24 @@ function WelcomeHeader(props) {
           <input type="text" />
         </div>
         <div className="header__right">
-          <Link to="/home">
-            <HeaderOption Icon={HomeIcon} title="Home" />
+          <Link
+            to="/signin"
+            style={{ marginRight: "10px", textDecoration: "none" }}
+          >
+            <Button style={{ color: "green" }} endIcon={<SendIcon />}>
+              Signin
+            </Button>
+          </Link>
+          <Link
+            style={{
+              marginRight: "10px",
+              textDecoration: "none",
+            }}
+            to="/signup"
+          >
+            <Button style={{ color: "green" }} endIcon={<JoinFullIcon />}>
+              Signup
+            </Button>
           </Link>
         </div>
       </div>

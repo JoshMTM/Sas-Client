@@ -16,6 +16,7 @@ import { login, logout } from "./features/userSlice";
 import Welcome from "./components/welcome/Welcome";
 import Profile from "./components/Profile";
 import DreamDetails from "./components/DreamDetails";
+import ProfilePeople from "./components/ProfilePeople";
 
 function App() {
   const [dreams, setDreams] = useState([]);
@@ -157,6 +158,10 @@ function App() {
         <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
         <Route path="/home" element={<HomePage onLogout={handleLogout} />} />
         <Route path="/profile" element={<Profile dreams={dreams} />} />
+        <Route
+          path="/:id/profile"
+          element={<ProfilePeople dreams={dreams} />}
+        />
 
         <Route
           path="/dreams/new"
