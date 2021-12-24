@@ -44,7 +44,19 @@ function Dreams(props) {
                                 <h3>{dream.title}</h3>
                                 <p>{dream.description}</p>
                                 <h3>Item list:</h3>
-                                <p>Supports: </p>
+                                <div className="itemsList">
+                                  {dream.items.map((item) => {
+                                    return (
+                                      <div>
+                                        <h5>{item.name}</h5>
+                                        <p>{item.description}</p>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                                <p>
+                                  <b>Supports:</b> 8
+                                </p>
                               </div>
                               <div className="btn_control">
                                 <Link
@@ -114,6 +126,7 @@ function Dreams(props) {
                               border: "1px solid rgba(192, 101, 45)",
                               padding: "5px",
                               borderRadius: "7px",
+                              width: "350px",
                             }}
                           >
                             {elem.title}

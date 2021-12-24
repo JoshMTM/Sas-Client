@@ -21,7 +21,7 @@ function MyMap() {
     }
     userData();
   }, []);
-  const position = [41.505, -0.9];
+  const position = [41.505, -1.9];
   function findPosition(lat, lon) {
     const position = [lat, lon];
     return position;
@@ -31,7 +31,7 @@ function MyMap() {
     <div>
       <MapContainer
         style={{
-          width: "600px",
+          width: "800px",
           height: "400px",
           marginTop: "10px",
           marginBottom: "20px",
